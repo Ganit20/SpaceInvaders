@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SpaceInvaders.ViewModel
+﻿namespace SpaceInvaders.ViewModel
 {
-    class GetHitbox
+    internal class GetHitbox
     {
     }
 }

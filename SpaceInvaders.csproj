@@ -9,21 +9,32 @@
   <ItemGroup>
     <None Remove="Assets\Backgrounds\starfield.png" />
     <None Remove="Assets\Sprites\BasicEnemy.png" />
-    <None Remove="Assets\Sprites\BasicLaser.png" />
-    <None Remove="Assets\Sprites\Basic_Ship.png" />
+    <None Remove="Assets\Sprites\RailBullet.png" />
+    <None Remove="Enemies\Basic\sprites\BasicEnemy.png" />
+    <None Remove="Enemies\Rail\sprites\RailFly.png" />
+    <None Remove="Enemies\Rail\sprites\RailShoot.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\Backgrounds\starfield.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Assets\Sprites\BasicEnemy.png">
+    <Resource Include="Assets\Sprites\RailBullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Enemies\Basic\sprites\BasicEnemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Sprites\BasicLaser.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Sprites\Basic_Ship.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Enemies\Rail\sprites\RailFly.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Enemies\Rail\sprites\RailShoot.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

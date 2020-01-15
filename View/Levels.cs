@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SpaceInvaders.View
+﻿namespace SpaceInvaders.View
 {
-    abstract class Levels
+    internal abstract class Levels
     {
     }
 }

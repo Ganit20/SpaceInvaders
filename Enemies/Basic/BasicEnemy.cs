@@ -1,14 +1,10 @@
-﻿using SpaceInvaders.View;
-using SpaceInvaders.ViewModel;
+﻿using SpaceInvaders.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace SpaceInvaders.Model
 {
-    class BasicEnemy
+    internal class BasicEnemy
     {
         public Enemy GetBasicEnemy()
         {
@@ -16,12 +12,12 @@ namespace SpaceInvaders.Model
             {
                 Id = 1,
                 Name = "Basic Enemy",
-                Texture = new BitmapImage(new Uri("/Assets/Sprites/BasicEnemy.png", UriKind.Relative)),
+                Texture = new BitmapImage(new Uri("/Enemies/Basic/sprites/BasicEnemy.png", UriKind.Relative)),
                 Speed = 5,
                 AI = new EnemyBehaviour()
-        };
+            };
             return e;
         }
-        
+
     }
 }
