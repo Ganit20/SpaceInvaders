@@ -10,6 +10,7 @@ namespace SpaceInvaders.Model
         {
             BasicLaserOne.Shooter = shooter;
             BasicLaserOne.TeamId = teamid;
+            BasicLaserOne.FireRatio = 2;
             return BasicLaserOne;
         }
 

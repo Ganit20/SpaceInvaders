@@ -15,17 +15,20 @@ namespace SpaceInvaders.Weapons.RailLaser
     {
         FrameworkElement Shooter;
         FirstLevel Level;
+        Weapon Laser;
         public void Add(FrameworkElement shooter,FirstLevel level,Weapon laser)
         {
             Task.Factory.StartNew(() =>
            {
                Shooter = shooter;
                Level = level;
+               Laser = laser;
                Level.Dispatcher.Invoke(async () =>
                {
                    
                    DispatcherTimer colision = new DispatcherTimer();
                    colision.Tick += CheckColision;
+
                    Level.Field.Children.Add(laser);
                    colision.Interval = new TimeSpan(0, 0, 0, 0, 30);
                    colision.Start();
@@ -46,7 +49,15 @@ namespace SpaceInvaders.Weapons.RailLaser
 
         void CheckColision(object sender, EventArgs e)
         {
-            new Collision().IsCollision(Shooter, Level.Field, Level);
+            Level.Dispatcher.Invoke(async () =>
+            {
+                var ob = new Collision().IsCollision(Laser, Level.Plaayer, Level);
+                if(ob!=null)
+                {
+                        var a = (Ship)ob;
+                        a.GetDamage(0.2, Level.Plaayer);    
+                }
+            });
         }
     }
 }

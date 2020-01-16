@@ -1,6 +1,7 @@
 ﻿using SpaceInvaders.Model;
 using SpaceInvaders.View;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -8,7 +9,7 @@ using System.Windows.Threading;
 
 namespace SpaceInvaders.ViewModel
 {
-    internal class Bullet
+     class Bullet
     {
         private readonly Weapon weapon;
         private readonly FirstLevel MainWindow;
@@ -24,13 +25,14 @@ namespace SpaceInvaders.ViewModel
             Tranform.Tick += new EventHandler(MoveBullet);
             Tranform.Start();
             mainWindow.Field.Children.Add(gun);
+           
         }
 
         private void MoveBullet(object sender, EventArgs e)
         {
             if (weapon != null)
             {
-                Point actualTop = weapon.TranslatePoint(new Point(0, 0), MainWindow.Field);
+                 Point actualTop = weapon.TranslatePoint(new Point(0, 0), MainWindow.Field);
                 Canvas.SetTop(weapon, actualTop.Y - (weapon.BulletSpeed * weapon.TeamId));
                 Canvas canvas;
                 if (weapon.TeamId < 0)
@@ -43,18 +45,20 @@ namespace SpaceInvaders.ViewModel
                 }
                 FrameworkElement collision = new Collision().IsCollision(weapon, canvas, MainWindow);
                 if (collision != null)
+                    
                 {
                     RemoveBullet();
                     try
                     {
-                        Enemy a = (Enemy)collision;
+                         Enemy a = (Enemy)collision;
                         a.AI.Stop();
+                        a.DeathAsync(canvas);
                     }
                     catch (Exception)
                     {
 
                     }
-                    canvas.Children.Remove(collision);
+                    
                     Tranform.Stop();
                 }
                 if (actualTop.Y < 0)

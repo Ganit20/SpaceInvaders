@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SpaceInvaders.View;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace SpaceInvaders.ViewModel

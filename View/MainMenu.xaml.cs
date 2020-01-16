@@ -15,8 +15,9 @@ namespace SpaceInvaders.View
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.MainFrame.Navigate(new FirstLevel());
-            MainWindow.Stats.Navigate(new Stats());
+            var a = new Stats();
+            MainWindow.MainFrame.Navigate(new FirstLevel(a));
+            MainWindow.Stats.Navigate(a);
         }
 
         private void Scores_Click(object sender, RoutedEventArgs e)

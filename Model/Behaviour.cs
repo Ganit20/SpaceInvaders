@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace SpaceInvaders.Model
 {
-    public class Behaviour
+    public abstract class Behaviour
     {
 
         public virtual void Start(FirstLevel level)

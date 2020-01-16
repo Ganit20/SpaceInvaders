@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 
 namespace SpaceInvaders.Model
 {
-    internal class Weapon : Image
+    public  class Weapon : Image
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -19,6 +19,7 @@ namespace SpaceInvaders.Model
         }
         public int Speed { get; set; }
         public int BulletSpeed { get; set; }
+        public int FireRatio { get; set; }
         public int Price { get; set; }
         public double BulletWidth
         {

@@ -16,7 +16,7 @@
             </Canvas.Background>
             <Canvas x:Name="Enemy"/>
             <Canvas x:Name="Plaayer" Canvas.Bottom="10">
-                <Image x:Name="PlayerObject" x:FieldModifier="public" Canvas.Bottom="10"   Width="50" Height="50" Source="/Assets/Sprites/Basic_Ship.png" />
+                
             </Canvas>
         </Canvas>
     </Grid>

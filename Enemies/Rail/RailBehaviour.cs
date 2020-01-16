@@ -45,11 +45,11 @@ namespace SpaceInvaders.Enemies.Rail
                 {
                     var laser = new Weapons.RailLaser.RailLaser().GetRailLaser(Enemy, -1);
                     enemy.Texture = new BitmapImage(new Uri("/Enemies/Rail/sprites/RailShoot.png", UriKind.Relative));
-                    
                     Point ShooterPoint = Enemy.TranslatePoint(new Point(0, 0), Level.Field);
+                    laser.BulletWidth = 40;
                     Canvas.SetTop(laser, ShooterPoint.Y);
-                    Canvas.SetLeft(laser, ShooterPoint.X);
-                    laser.Source =  new TransformedBitmap(laser.BulletTexture, new ScaleTransform( 30, Level.Field.ActualHeight - Enemy.ActualHeight));
+                    Canvas.SetLeft(laser, ShooterPoint.X + Enemy.ActualWidth/2 - 20);
+                    laser.BulletHeight = Level.ActualHeight;
                     new RailShoot().Add(Enemy, Level, laser);
                     await Task.Delay(1500);
                     new RailShoot().Remove(laser,Level);
@@ -82,6 +82,7 @@ namespace SpaceInvaders.Enemies.Rail
         }
         public override void Stop()
         {
+            Shoot.Stop();
             Watch.Stop();
         }
     }
