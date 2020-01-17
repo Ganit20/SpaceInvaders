@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using SpaceInvaders.Model;
+using System.Windows.Controls;
 
 namespace SpaceInvaders.View
 {
@@ -10,6 +11,7 @@ namespace SpaceInvaders.View
         public Stats()
         {
             InitializeComponent();
+            Points.DataContext = new stats().Points;
         }
     }
 }

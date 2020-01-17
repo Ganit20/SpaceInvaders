@@ -13,8 +13,11 @@ namespace SpaceInvaders.Model
             {
                 Id = 2,
                 Name = "Rail Laser",
+                MaxHP = 25,
+                actualHP = 25,
                 Texture = new BitmapImage(new Uri("/Enemies/Rail/sprites/RailFly.png", UriKind.Relative)),
                 Speed = 2,
+                LootPoints = 4,
                 AI = new RailBehaviour()
             };
             return e;

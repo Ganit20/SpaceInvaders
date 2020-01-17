@@ -7,7 +7,7 @@ namespace SpaceInvaders.Model
     public  class Weapon : Image
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string ItemName { get; set; }
         BitmapImage bulletTexture;
         public BitmapImage BulletTexture
         {
@@ -19,8 +19,10 @@ namespace SpaceInvaders.Model
         }
         public int Speed { get; set; }
         public int BulletSpeed { get; set; }
-        public int FireRatio { get; set; }
+        public double FireRatio { get; set; }
+        public int Damage { get; set; }
         public int Price { get; set; }
+        public bool Unlock { get; set; }
         public double BulletWidth
         {
             get => ActualWidth;

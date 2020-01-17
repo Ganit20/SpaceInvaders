@@ -51,8 +51,8 @@ namespace SpaceInvaders.ViewModel
                     try
                     {
                          Enemy a = (Enemy)collision;
-                        a.AI.Stop();
-                        a.DeathAsync(canvas);
+                        
+                        a.GetDamage(weapon.Damage,canvas);
                     }
                     catch (Exception)
                     {

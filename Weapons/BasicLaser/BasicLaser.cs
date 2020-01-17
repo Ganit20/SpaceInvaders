@@ -10,12 +10,16 @@ namespace SpaceInvaders.Model
         {
             BasicLaserOne.Shooter = shooter;
             BasicLaserOne.TeamId = teamid;
-            BasicLaserOne.FireRatio = 2;
             return BasicLaserOne;
         }
 
         private readonly Weapon BasicLaserOne = new Weapon()
         {
+            FireRatio = 2,
+            Damage = 2,
+            WeaponName = "Basic Laser",
+            Price = 0,
+            Unlock = true,
             BulletHeight = 15,
             BulletWidth = 15,
             BulletTexture = new BitmapImage(new Uri("/Assets/Sprites/BasicLaser.png", UriKind.Relative)),

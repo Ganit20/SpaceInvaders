@@ -13,7 +13,7 @@ namespace SpaceInvaders.View
 
     public partial class FirstLevel : Page
     {
-        private readonly int EnemyUnits = 15;
+        private readonly int EnemyUnits = 3;
         private readonly DispatcherTimer Watch = new DispatcherTimer();
         public Ship PlayerObject;
         Stats stats;
@@ -23,13 +23,13 @@ namespace SpaceInvaders.View
             stats = s;
             InitializeComponent();
             Focusable = true;
-            Application.Current.MainWindow.KeyDown += new KeyEventHandler(Shoot);
-            Application.Current.MainWindow.KeyDown += new KeyEventHandler(Movement);
+            Application.Current.MainWindow.KeyDown += new KeyEventHandler(Controls);
             SpawnPlayer();
             Watch.Tick += SpawnEnemy;
             Watch.Interval = new TimeSpan(0, 0, 0, 0, 200);
             Watch.Start();
             Shot = DateTime.Now;
+            new Model.stats().Points = 0;
             
         }
         void SpawnPlayer()
@@ -40,7 +40,8 @@ namespace SpaceInvaders.View
             Name = "Player",
             Speed = 20,
             MaxHP=20,
-            ActualHP=20};
+            ActualHP=20,
+            Level = this};
             ship.weapon = new BasicLaser().GetBasicLaser(ship,1);
             PlayerObject = ship;
             this.Plaayer.Children.Add(ship);
@@ -72,28 +73,48 @@ namespace SpaceInvaders.View
         }
 
        
-          
-        private async void Shoot(object Sender, KeyEventArgs e)
+          public static void GameOver()
         {
 
-            if (e.Key == Key.Space && (DateTime.Now - Shot).TotalMilliseconds>=1000/PlayerObject.weapon.FireRatio)
+        }
+
+
+        private void Controls(object Sender, KeyEventArgs e)
+        {
+            bool ready;
+            if ((DateTime.Now - Shot).TotalMilliseconds >= 1000 / PlayerObject.weapon.FireRatio)
+                ready = true;
+            else 
+                ready = false;
+
+            if (e.Key == Key.Space && ready==true )
             {
                 Weapon weapon = new BasicLaser().GetBasicLaser(PlayerObject, 1);
                 new Bullet(this, weapon);
                 Shot = DateTime.Now;
-               
-             }
-        }
 
-        private void Movement(object Sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Left || e.Key == Key.A)
+            }
+            else if (e.Key == Key.Left || e.Key == Key.A)
             {
                 new PlayerMove(this).MoveLeft();
             }
             else if (e.Key == Key.Right || e.Key == Key.D)
             {
                 new PlayerMove(this).MoveRight();
+            }
+            else if((e.Key == Key.Right || e.Key == Key.D) && e.Key == Key.Space && ready == true)
+            {
+                new PlayerMove(this).MoveRight();
+                Weapon weapon = new BasicLaser().GetBasicLaser(PlayerObject, 1);
+                new Bullet(this, weapon);
+                Shot = DateTime.Now;
+            }
+            else if ((e.Key == Key.Left || e.Key == Key.A) && e.Key == Key.Space && ready == true)
+            {
+                new PlayerMove(this).MoveLeft();
+                Weapon weapon = new BasicLaser().GetBasicLaser(PlayerObject, 1);
+                new Bullet(this, weapon);
+                Shot = DateTime.Now;
             }
 
         }

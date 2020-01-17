@@ -10,14 +10,17 @@ namespace SpaceInvaders.Weapons.RailLaser
         public Weapon GetRailLaser(FrameworkElement shooter, int teamid)
         {
             RailLaserOne.Shooter = shooter;
-            RailLaserOne.Height = shooter.ActualHeight;
             RailLaserOne.TeamId = teamid;
             return RailLaserOne;
         }
 
-        private readonly Weapon RailLaserOne = new Weapon()
+        public readonly Weapon RailLaserOne = new Weapon()
         {
+            WeaponName = "Rail Gun",
+            FireRatio=0.5,
+            Damage= 1,
             BulletWidth = 30,
+            Price = 1500,
             BulletTexture = new BitmapImage(new Uri("/Assets/Sprites/RailBullet.png", UriKind.Relative)),
         };
     }

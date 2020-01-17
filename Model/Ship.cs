@@ -2,8 +2,10 @@
 using SpaceInvaders.ViewModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 
 namespace SpaceInvaders.Model
 {
@@ -13,7 +15,7 @@ namespace SpaceInvaders.Model
 
 
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string ItemName { get; set; }
         public BitmapImage Texture
         {
             get => Texture;
@@ -35,6 +37,7 @@ namespace SpaceInvaders.Model
             }
         }
         public double MaxHP { get; set; }
+        public FirstLevel Level { get; set; }
         public void GetDamage(double Damage, Canvas canvas)
         {
             ActualHP -= Damage;
@@ -49,7 +52,9 @@ namespace SpaceInvaders.Model
         {
             if(death!=true)
           await  new Animator().Animate(this, "/Assets/Sprites/Explosions/", "Explosion", 7);
-            
+           
+            Level.NavigationService.Navigate(new GameOver());
+
         }
         protected void OnPropertyChanged(string name)
         {

@@ -19,7 +19,8 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            
+            <TextBlock Text="Points:" Foreground="White" />
+            <TextBlock Text="{Binding}" x:Name="Points" Foreground="White" />
         </StackPanel>
     </Grid>
 </Page>

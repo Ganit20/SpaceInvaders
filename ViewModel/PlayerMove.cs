@@ -16,7 +16,7 @@ namespace SpaceInvaders
 
         internal void MoveRight()
         {
-            if (CurrentPlayerPosition.Y > 0)
+            if (CurrentPlayerPosition.X < gameWindow.ActualWidth- gameWindow.PlayerObject.ActualWidth)
             {
                 Canvas.SetLeft(gameWindow.PlayerObject, CurrentPlayerPosition.X + 10);
             }
@@ -24,7 +24,7 @@ namespace SpaceInvaders
 
         internal void MoveLeft()
         {
-            if (CurrentPlayerPosition.Y > 0)
+            if (CurrentPlayerPosition.X > 0)
             {
                 Canvas.SetLeft(gameWindow.PlayerObject, CurrentPlayerPosition.X - 10);
             }

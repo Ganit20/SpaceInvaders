@@ -18,11 +18,12 @@ namespace SpaceInvaders.Model
         public Behaviour AI { get; set; }
         public double actualHP { get; set; }
         public double MaxHP { get; set; }
+        public int LootPoints { get; set; }
         public void GetDamage(double Damage,Canvas canvas)
-        {
-            actualHP -= Damage;
-            if (actualHP <= 0)
             {
+            actualHP -= Damage;
+             
+            if(actualHP<=0){
                 DeathAsync(canvas);
             }
         }
@@ -30,6 +31,8 @@ namespace SpaceInvaders.Model
         {
            await new Animator().Animate(this, "/Assets/Sprites/Explosions/","Explosion",7);
             canvas.Children.Remove(this);
+            AI.Stop();
+            new stats().Points += LootPoints;
         }
     }
 }

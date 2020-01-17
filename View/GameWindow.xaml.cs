@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.View;
+﻿using SpaceInvaders.Model;
+using SpaceInvaders.View;
 using System.Windows;
 
 namespace SpaceInvaders
@@ -11,7 +12,11 @@ namespace SpaceInvaders
         public GameWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MainMenu(this));
+            new Load(this);
+        }
+        public void GameOver()
+        {
+            MainFrame.Navigate(new Stats());
         }
 
     }
