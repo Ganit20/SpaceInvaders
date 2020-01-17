@@ -20,7 +20,7 @@ namespace SpaceInvaders.View
         private void Play_Click(object sender, RoutedEventArgs e)
         {
 
-            MainWindow.MainFrame.Navigate(/*new FirstLevel(a)*/new Shop());
+            MainWindow.MainFrame.Navigate(/*new FirstLevel(a)*/new Briefieng(MainWindow));
             MainWindow.Stats.Navigate(/*new FirstLevel(a)*/new PlayerStats());
             
         }

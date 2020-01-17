@@ -17,7 +17,7 @@ namespace SpaceInvaders.Model
         {
             FireRatio = 2,
             Damage = 2,
-            WeaponName = "Basic Laser",
+            ItemName = "Basic Laser",
             Price = 0,
             Unlock = true,
             BulletHeight = 15,

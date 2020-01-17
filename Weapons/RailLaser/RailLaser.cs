@@ -16,7 +16,7 @@ namespace SpaceInvaders.Weapons.RailLaser
 
         public readonly Weapon RailLaserOne = new Weapon()
         {
-            WeaponName = "Rail Gun",
+            ItemName = "Rail Gun",
             FireRatio=0.5,
             Damage= 1,
             BulletWidth = 30,

@@ -70,7 +70,7 @@ namespace SpaceInvaders.Enemies.Rail
                 Random random = new Random();
                 Point CurrentPos = Enemy.TranslatePoint(new Point(0, 0), Level);
                 Canvas.SetLeft(Enemy, CurrentPos.X + (5 * movement));
-                if (CurrentPos.X >= Level.WindowWidth - Enemy.ActualWidth)
+                  if (CurrentPos.X >= Level.WindowWidth - Enemy.ActualWidth)
                 {
                     movement = -1;
                 }
