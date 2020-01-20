@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpaceInvaders.Weapons.RailLaser;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -37,5 +38,8 @@ namespace SpaceInvaders.Model
         }
         public int TeamId { get; set; }
         public FrameworkElement Shooter { get; set; }
+        public IShootBehaviour Shoot { get; set; }
+        
+
     }
 }

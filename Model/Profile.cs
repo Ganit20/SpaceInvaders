@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 namespace SpaceInvaders.Model
 {
@@ -8,9 +9,9 @@ namespace SpaceInvaders.Model
         public  string Name { get; set; }
         public  int Money { get; set; }
         public  int HighestScore { get; set; }
-        public List<int> WeaponsUnlocked = new List<int>();
-        public List<int> ShipsUnlocked = new List<int>();
-        public List<Weapon> WUnlocked = new List<Weapon>();
-        public List<Ship> SUnlocked = new List<Ship>();
+        public ObservableCollection<int> WeaponsUnlocked = new ObservableCollection<int>();
+        public ObservableCollection<int> ShipsUnlocked = new ObservableCollection<int>();
+        public ObservableCollection<Weapon> WUnlocked = new ObservableCollection<Weapon>();
+        public ObservableCollection<Ship> SUnlocked = new ObservableCollection<Ship>();
     }
 }

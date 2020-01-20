@@ -50,7 +50,7 @@ namespace SpaceInvaders.Enemies.Rail
                     Canvas.SetTop(laser, ShooterPoint.Y);
                     Canvas.SetLeft(laser, ShooterPoint.X + Enemy.ActualWidth/2 - 20);
                     laser.BulletHeight = Level.ActualHeight;
-                    new RailShoot().Add(Enemy, Level, laser);
+                    new RailShoot().Shoot(Enemy, Level, laser);
                     await Task.Delay(1500);
                     new RailShoot().Remove(laser,Level);
                     enemy.Texture = new BitmapImage(new Uri("/Enemies/Rail/sprites/RailFly.png", UriKind.Relative));
@@ -65,20 +65,24 @@ namespace SpaceInvaders.Enemies.Rail
 
         public void Behaviour(object sender, EventArgs e)
         {
-            if (Enemy != null)
+            try
             {
-                Random random = new Random();
-                Point CurrentPos = Enemy.TranslatePoint(new Point(0, 0), Level);
-                Canvas.SetLeft(Enemy, CurrentPos.X + (5 * movement));
-                 if (CurrentPos.X >= Level.WindowWidth - Enemy.ActualWidth)
+                if (Enemy != null)
                 {
-                    movement = -1;
-                }
-                else if (CurrentPos.X <= 4)
-                {
-                    movement = 1;
+                    Random random = new Random();
+                    Point CurrentPos = Enemy.TranslatePoint(new Point(0, 0), Level);
+                    Canvas.SetLeft(Enemy, CurrentPos.X + (5 * movement));
+                    if (CurrentPos.X >= Level.WindowWidth - Enemy.ActualWidth)
+                    {
+                        movement = -1;
+                    }
+                    else if (CurrentPos.X <= 4)
+                    {
+                        movement = 1;
+                    }
                 }
             }
+            catch (Exception) { }
         }
         public override void Stop()
         {

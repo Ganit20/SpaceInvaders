@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpaceInvaders.ViewModel;
+using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -15,6 +16,7 @@ namespace SpaceInvaders.Model
 
         private readonly Weapon BasicLaserOne = new Weapon()
         {
+            Id=0,
             FireRatio = 2,
             Damage = 2,
             ItemName = "Basic Laser",
@@ -24,6 +26,7 @@ namespace SpaceInvaders.Model
             BulletWidth = 15,
             BulletTexture = "/Assets/Sprites/BasicLaser.png", 
             BulletSpeed = 7,
+            Shoot=new Bullet(),
         };
     }
 }

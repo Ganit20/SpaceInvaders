@@ -38,7 +38,7 @@ namespace SpaceInvaders.ViewModel
 
                 if (random.Next(0, 1000) > 990)
                 {
-                    new Bullet(Level, new BasicLaser().GetBasicLaser(Enemy, -1));
+                    new Bullet().Shoot(Enemy,Level, new BasicLaser().GetBasicLaser(Enemy, -1));
                 }
             }
         }

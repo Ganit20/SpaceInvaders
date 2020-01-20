@@ -16,12 +16,14 @@ namespace SpaceInvaders.Weapons.RailLaser
 
         public readonly Weapon RailLaserOne = new Weapon()
         {
+            Id=2,
             ItemName = "Rail Gun",
             FireRatio=0.5,
             Damage= 1,
             BulletWidth = 30,
             Price = 1500,
             BulletTexture ="/Assets/Sprites/RailBullet.png",
+            Shoot=new RailShoot()
         };
     }
 }

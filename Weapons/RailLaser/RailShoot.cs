@@ -11,12 +11,12 @@ using System.Windows.Threading;
 
 namespace SpaceInvaders.Weapons.RailLaser
 {
-    class RailShoot
+    class RailShoot : IShootBehaviour
     {
         FrameworkElement Shooter;
         FirstLevel Level;
         Weapon Laser;
-        public void Add(FrameworkElement shooter,FirstLevel level,Weapon laser)
+        public void Shoot(FrameworkElement shooter,FirstLevel level,Weapon laser)
         {
             Task.Factory.StartNew(() =>
            {

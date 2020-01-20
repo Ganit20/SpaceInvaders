@@ -1,5 +1,6 @@
 ﻿using SpaceInvaders.Model;
 using SpaceInvaders.ViewModel;
+using SpaceInvaders.Weapons.Double_Laser;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,6 +18,7 @@ namespace SpaceInvaders.View
         private readonly DispatcherTimer Watch = new DispatcherTimer();
         public Ship PlayerObject;
         Stats stats;
+        Weapon weapon;
         DateTime Shot; 
         public FirstLevel(Stats s,Ship player,Weapon gun)
         {
@@ -43,6 +45,7 @@ namespace SpaceInvaders.View
             Canvas.SetBottom(player, 10);
             Canvas.SetLeft(player, this.ActualWidth / 2);
             stats.HPBar.DataContext = player;
+            weapon = gun;
         }
 
         private void SpawnEnemy(object sender, EventArgs e)
@@ -76,6 +79,7 @@ namespace SpaceInvaders.View
 
         private void Controls(object Sender, KeyEventArgs e)
         {
+            var bullet = GenereteW(weapon);
             bool ready;
             if ((DateTime.Now - Shot).TotalMilliseconds >= 1000 / PlayerObject.weapon.FireRatio)
                 ready = true;
@@ -84,8 +88,7 @@ namespace SpaceInvaders.View
 
             if (e.Key == Key.Space && ready==true )
             {
-                Weapon weapon = new BasicLaser().GetBasicLaser(PlayerObject, 1);
-                new Bullet(this, weapon);
+                    weapon.Shoot.Shoot(PlayerObject, this, weapon);
                 Shot = DateTime.Now;
 
             }
@@ -100,18 +103,33 @@ namespace SpaceInvaders.View
             else if((e.Key == Key.Right || e.Key == Key.D) && e.Key == Key.Space && ready == true)
             {
                 new PlayerMove(this).MoveRight();
-                Weapon weapon = new BasicLaser().GetBasicLaser(PlayerObject, 1);
-                new Bullet(this, weapon);
+                weapon.Shoot.Shoot(PlayerObject,this,weapon);
                 Shot = DateTime.Now;
             }
             else if ((e.Key == Key.Left || e.Key == Key.A) && e.Key == Key.Space && ready == true)
             {
                 new PlayerMove(this).MoveLeft();
-                Weapon weapon = new BasicLaser().GetBasicLaser(PlayerObject, 1);
-                new Bullet(this, weapon);
+                weapon.Shoot.Shoot(PlayerObject, this, weapon);
                 Shot = DateTime.Now;
             }
 
+        }
+
+        private Weapon GenereteW(Weapon w)
+        {
+            switch(w.Id)
+            {
+                case 0:
+                    return new BasicLaser().GetBasicLaser(w.Shooter,w.TeamId);
+                    
+                case 1:
+                    return new DoubleLaser().GetDoubleLaser(w.Shooter, w.TeamId);
+                    
+                case 2:
+                    return new Weapons.RailLaser.RailLaser().GetRailLaser(w.Shooter, w.TeamId);
+                    
+            }
+            return new BasicLaser().GetBasicLaser(w.Shooter, w.TeamId);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SpaceInvaders.Model;
 using SpaceInvaders.View;
+using SpaceInvaders.Weapons.RailLaser;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,12 +10,12 @@ using System.Windows.Threading;
 
 namespace SpaceInvaders.ViewModel
 {
-     class Bullet
+     class Bullet:IShootBehaviour
     {
-        private readonly Weapon weapon;
-        private readonly FirstLevel MainWindow;
+        private  Weapon weapon;
+        private  FirstLevel MainWindow;
         private readonly DispatcherTimer Tranform = new DispatcherTimer();
-        public Bullet(FirstLevel mainWindow, Weapon gun)
+        public void Shoot(FrameworkElement shooter,FirstLevel mainWindow, Weapon gun)
         {
             MainWindow = mainWindow;
             weapon = gun;

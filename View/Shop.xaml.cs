@@ -2,6 +2,8 @@
 using SpaceInvaders.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,23 +20,42 @@ namespace SpaceInvaders.View
     /// <summary>
     /// Interaction logic for Shop.xaml
     /// </summary>
-    public partial class Shop : Page
+    public partial class Shop : Page , INotifyPropertyChanged
     {
         GameWindow Window;
+        ObservableCollection<Weapon> weaponList = new ObservableCollection<Weapon>();
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<Weapon> WeaponList
+        {
+            get
+            {
+                return weaponList;
+            }
+            set
+            {
+                weaponList = value;
+                OnPropertyChanged("WeaponList");
+            }
+        }
+        ObservableCollection<Ship> ShipList = new ObservableCollection<Ship>();
         public Shop(GameWindow w)
         {
             Window = w;
             InitializeComponent();
-            Weapons.ItemsSource = new WeaponList().Weapons;
-            Ships.ItemsSource = new ShipList().Ships;
+            WeaponList = new WeaponList().Weapons;
+            ShipList = new ShipList().Ships;
+            Weapons.ItemsSource = WeaponList;
+            Ships.ItemsSource = ShipList;
         }
 
         private void WeaponChoosed(object sender, SelectionChangedEventArgs e)
         {
-            var weapon =(Weapon)Weapons.SelectedItem;
+            var weapon = (Weapon)Weapons.SelectedItem;
+            WeaponStats.Visibility = Visibility.Visible;
             WeaponStats.DataContext = weapon;
-            if (weapon.Unlock == false) WeaponBuy.IsEnabled = true; 
-            else WeaponBuy.IsEnabled = false; 
+            if (weapon.Unlock == false) WeaponBuy.IsEnabled = true;
+            else WeaponBuy.IsEnabled = false;
 
         }
         private void Clicked_Play(object sender, RoutedEventArgs e)
@@ -46,7 +67,7 @@ namespace SpaceInvaders.View
         private void CategoryChanged(object sender, SelectionChangedEventArgs e)
         {
             var a = ShopCategories.SelectedIndex;
-            switch(a)
+            switch (a)
             {
                 case 0:
                     ShipsField.Visibility = Visibility.Collapsed;
@@ -56,7 +77,7 @@ namespace SpaceInvaders.View
                     break;
                 case 1:
                     WeaponField.Visibility = Visibility.Collapsed;
-                    ShipsField.Visibility = Visibility.Visible; 
+                    ShipsField.Visibility = Visibility.Visible;
                     Weapons.Visibility = Visibility.Collapsed;
                     Ships.Visibility = Visibility.Visible;
                     break;
@@ -68,9 +89,14 @@ namespace SpaceInvaders.View
             var a = (Weapon)Weapons.SelectedItem;
             if (MainMenu.prof.Money >= a.Price)
             {
+                WeaponStats.Visibility = Visibility.Collapsed;
+                WeaponList[Weapons.SelectedIndex].Unlock = true;
                 MainMenu.prof.WeaponsUnlocked.Add(Weapons.SelectedIndex);
                 MainMenu.prof.Money = MainMenu.prof.Money - a.Price;
-            } 
+                MainMenu.prof.WUnlocked.Add(WeaponList[Weapons.SelectedIndex]);
+                new Save(MainMenu.prof);
+
+            }
         }
 
         private void BuyShip(object sender, RoutedEventArgs e)
@@ -78,9 +104,11 @@ namespace SpaceInvaders.View
             var a = (Ship)Ships.SelectedItem;
             if (MainMenu.prof.Money >= a.Price)
             {
+                ShipStats.Visibility = Visibility.Collapsed;
                 MainMenu.prof.ShipsUnlocked.Add(Ships.SelectedIndex);
                 MainMenu.prof.Money = MainMenu.prof.Money - a.Price;
-                MainMenu.prof.SUnlocked.Add(new ShipList().Ships[Ships.SelectedIndex]);
+                MainMenu.prof.SUnlocked.Add(ShipList[Ships.SelectedIndex]);
+                ShipList[Ships.SelectedIndex].Unlock = true;
                 new Save(MainMenu.prof);
             }
 
@@ -95,8 +123,16 @@ namespace SpaceInvaders.View
         {
             var ship = (Ship)Ships.SelectedItem;
             ShipStats.DataContext = ship;
+            ShipStats.Visibility = Visibility.Visible;
             if (ship.Unlock == false) ShipBuy.IsEnabled = true;
             else ShipBuy.IsEnabled = false;
+        }
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

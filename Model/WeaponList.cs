@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpaceInvaders.Weapons.Double_Laser;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -11,6 +12,7 @@ namespace SpaceInvaders.Model
         public WeaponList()
         {
             Weapons.Add(new BasicLaser().GetBasicLaser(null,1));
+            Weapons.Add(new DoubleLaser().GetDoubleLaser(null,1));
             Weapons.Add(new Weapons.RailLaser.RailLaser().GetRailLaser(null,1));
         }
     }
