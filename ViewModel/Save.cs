@@ -14,6 +14,14 @@ namespace SpaceInvaders.ViewModel
         {
             using(var writer = new StreamWriter("Profile.si"))
             {
+                new Profile()
+                {
+                    Name = prof.Name,
+                    Money = prof.Money,
+                    HighestScore = prof.HighestScore,
+                    WeaponsUnlocked = prof.WeaponsUnlocked,
+                    ShipsUnlocked = prof.ShipsUnlocked
+                };
                 var save = JsonConvert.SerializeObject(prof);
                 writer.WriteLine(save);
             }

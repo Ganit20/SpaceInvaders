@@ -18,36 +18,31 @@ namespace SpaceInvaders.View
         public Ship PlayerObject;
         Stats stats;
         DateTime Shot; 
-        public FirstLevel(Stats s)
+        public FirstLevel(Stats s,Ship player,Weapon gun)
         {
             stats = s;
             InitializeComponent();
+            SpawnPlayer(player, gun);
             Focusable = true;
             Application.Current.MainWindow.KeyDown += new KeyEventHandler(Controls);
-            SpawnPlayer();
             Watch.Tick += SpawnEnemy;
             Watch.Interval = new TimeSpan(0, 0, 0, 0, 200);
             Watch.Start();
             Shot = DateTime.Now;
-            new Model.stats().Points = 0;
+            new stats().Points = 0;
             
         }
-        void SpawnPlayer()
+        void SpawnPlayer(Ship player,Weapon gun)
         {
-            Ship ship = new Ship() { Texture = new BitmapImage(new Uri("/Assets/Sprites/Basic_Ship.png", UriKind.Relative)),
-            Height = 70,
-            Width = 70,  
-            Name = "Player",
-            Speed = 20,
-            MaxHP=20,
-            ActualHP=20,
-            Level = this};
-            ship.weapon = new BasicLaser().GetBasicLaser(ship,1);
-            PlayerObject = ship;
-            this.Plaayer.Children.Add(ship);
-            Canvas.SetBottom(ship, 10);
-            Canvas.SetLeft(ship, this.ActualWidth / 2);
-            stats.HPBar.DataContext = ship;
+
+            player.Level = this;
+            gun.Shooter = player;
+            player.weapon = gun;
+            PlayerObject = player;
+            this.Plaayer.Children.Add(player);
+            Canvas.SetBottom(player, 10);
+            Canvas.SetLeft(player, this.ActualWidth / 2);
+            stats.HPBar.DataContext = player;
         }
 
         private void SpawnEnemy(object sender, EventArgs e)

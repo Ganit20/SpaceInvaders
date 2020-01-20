@@ -18,8 +18,53 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="MyGuns" Background="Black" Foreground="White" Grid.Row="1" Grid.Column="2" SelectionChanged="GunChoose"/>
-        <ListView x:Name="MyShips" Background="Black" Foreground="White" Grid.Column="2" SelectionChanged="ShipChoose"/>
+        <ListView x:Name="MyGuns" Background="Black" Foreground="White" Grid.Row="1" Grid.Column="2" SelectionChanged="GunChoose">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel MaxHeight="80" Orientation="Horizontal">
+                        <Image Source="{Binding BulletTexture}"/>
+                        <WrapPanel Orientation="Vertical">
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding ItemName}"/>
+                            </WrapPanel>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="FireRatio per/sec: "/>
+                                <TextBlock Text="{Binding FireRatio}"/>
+                            </WrapPanel>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="Damage: "/>
+                                <TextBlock Text="{Binding Damage}"/>
+                            </WrapPanel>
+                        </WrapPanel>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="MyShips" Background="Black" Foreground="White" Grid.Column="2" SelectionChanged="ShipChoose">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel MaxHeight="80" Orientation="Horizontal">
+                        <Image Source="{Binding Texture}"/>
+                        <WrapPanel Orientation="Vertical">
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding ItemName}"/>
+                            </WrapPanel>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="Speed: "/>
+                                <TextBlock Text="{Binding Speed}"/>
+                            </WrapPanel>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock Text="Hp: "/>
+                                <TextBlock Text="{Binding MaxHP}"/>
+                            </WrapPanel>
+
+                        </WrapPanel>
+                    </WrapPanel>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
         <WrapPanel  Background="Black"  Grid.Column="1" Orientation="Horizontal">
             <WrapPanel  x:Name="Ships"  Orientation="Vertical">
                 <Image Source="{Binding Texture, UpdateSourceTrigger=PropertyChanged}"/>
@@ -31,7 +76,7 @@
             </WrapPanel>
         </WrapPanel>
         <StackPanel Background="Black" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30">
-            <Button x:Name="Play" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="black" Foreground="white" BorderBrush="white" Margin="10" Click="PlayV" Content="Play"/>
+            <Button x:Name="Play" IsEnabled="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="black" Foreground="white" BorderBrush="white" Margin="10" Click="PlayV" Content="Play"/>
             <Button x:Name="Shop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Foreground="white" Background="black" BorderBrush="white" Click="ShopV" Content="Shop"/>
         </StackPanel>         
 

@@ -1,5 +1,6 @@
 ﻿using SpaceInvaders.View;
 using SpaceInvaders.ViewModel;
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,15 +17,21 @@ namespace SpaceInvaders.Model
 
         public int Id { get; set; }
         public string ItemName { get; set; }
-        public BitmapImage Texture
+        BitmapImage texture;
+        public string Texture
         {
-            get => Texture;
-            set => Source = value;
+            get => texture.UriSource.ToString();
+            set
+            {
+                texture = new BitmapImage(new Uri(value, UriKind.Relative));
+                Source = new BitmapImage(new Uri(value, UriKind.Relative));
+            }
         }
         public int Speed { get; set; }
         public int Price { get; set; }
          double actualHP { get; set; }
         bool death { get; set; }
+        public bool Unlock { get; set; }
         public Weapon weapon { get; set; }
         public double ActualHP { get
             {

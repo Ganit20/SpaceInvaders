@@ -15,30 +15,42 @@
             <ColumnDefinition Width="0.7*"/>
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
-        <ListView  Background="Black" x:Name="ShopCategories" Foreground="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+        <ListView  Background="Black" x:Name="ShopCategories" Foreground="White" SelectionChanged="CategoryChanged">
+            <ListViewItem>
+                <WrapPanel HorizontalAlignment="Center" Orientation="Vertical">
+                    <Image  Source="/Assets/sprites/BasicLaser.png" Height="40"/>
+                    <TextBlock Text="Weapons"/>
+                </WrapPanel>
+            </ListViewItem>
+            <ListViewItem>
+                <WrapPanel HorizontalAlignment="Center" Orientation="Vertical">
+                    <Image  Source="/Assets/sprites/Basic_Ship.png" Height="40"/>
+                    <TextBlock HorizontalAlignment="Center" Text="Ships"/>
+                </WrapPanel>
+               
+            </ListViewItem>
+        </ListView>
+            <Button Click="Back" Grid.Row="1" FontFamily="Segoe MDL2 Assets" Grid.Column="0" Background="Black" Foreground="white" Content="&#xE72B;" BorderBrush="White" />
+        </Grid>
+            <ListView  SelectionChanged="WeaponChoosed" Background="Black" x:Name="Weapons" Foreground="White" Grid.Column="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
+                    <WrapPanel MaxHeight="80">
+                        <Image Source="{Binding BulletTexture}"/>
                         <TextBlock
                         x:Name="Name"
-                        Text="{Binding Name}"/>
+                        Text="{Binding ItemName}"/>
+                       
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ListView  SelectionChanged="WeaponChoosed" Background="Black" x:Name="Weapons" Foreground="White" Grid.Column="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                    <TextBlock
-                        x:Name="Name"
-                        Text="{Binding WeaponName}"/>
-   
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <WrapPanel Grid.Column="2" >
+        <WrapPanel Grid.Column="2" x:FieldModifier="public" x:Name="WeaponField">
             <Grid x:Name="WeaponStats" x:FieldModifier="public">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -52,6 +64,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Label Foreground="White" HorizontalAlignment="Right" Grid.Row="1" Content="Name:"/>
@@ -59,13 +72,58 @@
                 <Label Foreground="White" HorizontalAlignment="Right" Grid.Row="3" Content="Fire Ratio per sec:"/>
                 <Label Foreground="White" HorizontalAlignment="Right" Grid.Row="4" Content="Damage:"/>
                 <Label Foreground="White" HorizontalAlignment="Right" Grid.Row="5" Content="Bought:"/>
-                <TextBlock VerticalAlignment="Center" Foreground="White" x:Name="WSName" Grid.Column="1" Grid.Row="1" Text="{Binding WeaponName}" />
+                <TextBlock VerticalAlignment="Center" Foreground="White" x:Name="WSName" Grid.Column="1" Grid.Row="1" Text="{Binding ItemName}" />
                 <TextBlock VerticalAlignment="Center" Foreground="White"  Grid.Column="1" Grid.Row="2" Text="{Binding Price}" />
                 <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="3" Text="{Binding FireRatio}" />
                 <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="4" Text="{Binding Damage}" />
                 <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="5" Text="{Binding Unlock}" />
-                     <Image Grid.Column="2" VerticalAlignment="Center" Grid.Row="6" Source="{Binding BulletTexture}"/>
+                <Image Grid.Column="2" VerticalAlignment="Center" Grid.Row="6" Source="{Binding BulletTexture}"/>
+                <Button x:Name="WeaponBuy" Click="BuyWeapon" Content="Buy" Grid.Column="1" Grid.Row="8" Foreground="White"  Background="Black" BorderBrush="White"/>
             </Grid>
         </WrapPanel>
+        <ListView  SelectionChanged="ShipChoosed" Visibility="Collapsed" Background="Black" x:Name="Ships" Foreground="White" Grid.Column="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel MaxHeight="80">
+                                <Image Source="{Binding BulletTexture}"/>
+                                <TextBlock
+                        x:Name="Name"
+                        Text="{Binding ItemName}"/>
+
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            <WrapPanel Grid.Column="2" x:Name="ShipsField" x:FieldModifier="public" Visibility="Collapsed">
+                <Grid x:Name="ShipStats" x:FieldModifier="public">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition  Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Foreground="White" HorizontalAlignment="Right" Grid.Row="1" Content="Name:"/>
+                    <Label Foreground="White" HorizontalAlignment="Right" Grid.Row="2" Content="Price:"/>
+                    <Label Foreground="White" HorizontalAlignment="Right" Grid.Row="3" Content="Speed:"/>
+                    <Label Foreground="White" HorizontalAlignment="Right" Grid.Row="4" Content="Damage:"/>
+                    <Label Foreground="White" HorizontalAlignment="Right" Grid.Row="5" Content="Bought:"/>
+                    <TextBlock VerticalAlignment="Center" Foreground="White" x:Name="SSName" Grid.Column="1" Grid.Row="1" Text="{Binding ItemName}" />
+                    <TextBlock VerticalAlignment="Center" Foreground="White"  Grid.Column="1" Grid.Row="2" Text="{Binding Price}" />
+                    <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="3" Text="{Binding MaxHP}" />
+                    <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="4" Text="{Binding Speed}" />
+                    <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="5" Text="{Binding Unlock}" />
+                    <Image Grid.Column="2" VerticalAlignment="Center" Grid.Row="6" Source="{Binding Texture}"/>
+                    <Button x:Name="ShipBuy" Click="BuyShip" Content="Buy" Grid.Column="1" Grid.Row="8" Foreground="White"  Background="Black" BorderBrush="White"/>
+                </Grid>
+            </WrapPanel>
     </Grid>
 </Page>

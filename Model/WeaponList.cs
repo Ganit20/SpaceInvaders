@@ -7,7 +7,7 @@ namespace SpaceInvaders.Model
 {
     class WeaponList
     {
-        public static ObservableCollection<Weapon> Weapons = new ObservableCollection<Weapon>();
+        public  ObservableCollection<Weapon> Weapons = new ObservableCollection<Weapon>();
         public WeaponList()
         {
             Weapons.Add(new BasicLaser().GetBasicLaser(null,1));

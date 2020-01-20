@@ -10,7 +10,20 @@ namespace SpaceInvaders.View
         public static Profile prof;
         public MainMenu(GameWindow Window,Profile _prof)
         {
+            
             prof = _prof;
+            foreach (var item in _prof.ShipsUnlocked)
+            {
+                var ship = new ShipList().Ships[item];
+                ship.Unlock = true;
+                prof.SUnlocked.Add(ship);
+            }
+            foreach (var item in _prof.WeaponsUnlocked)
+            {
+                var weapon = new WeaponList().Weapons[item];
+                weapon.Unlock = true;
+                prof.WUnlocked.Add(weapon);
+            }
             MainWindow = Window;
             InitializeComponent();
  

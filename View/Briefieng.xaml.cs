@@ -20,38 +20,49 @@ namespace SpaceInvaders.View
     public partial class Briefieng : Page
     {
         GameWindow window;
+        Weapon wChoosed;
+        Ship sChoosed;
         public Briefieng(GameWindow w)
         {
             InitializeComponent();
             window = w;
-            MyGuns.ItemsSource = MainMenu.prof.WeaponsUnlocked;
-            MyShips.ItemsSource = MainMenu.prof.ShipsUnlocked;
+            MyGuns.ItemsSource = MainMenu.prof.WUnlocked;
+            MyShips.ItemsSource = MainMenu.prof.SUnlocked;
         }
 
         private void PlayV(object sender, RoutedEventArgs e)
         {
             var a = new Stats();
-            window.MainFrame.Navigate(new FirstLevel(a));
+            window.MainFrame.Navigate(new FirstLevel(a,sChoosed,wChoosed));
             window.Stats.Navigate(a);
         }
 
         private void ShopV(object sender, RoutedEventArgs e)
         {
-
+            window.MainFrame.Navigate(new Shop(window));
         }
 
         private void GunChoose(object sender, SelectionChangedEventArgs e)
         {
-            var a = (Weapon)sender;
-            if (a != null)
-                Guns.DataContext = a;
+            var a = (Weapon)MyGuns.SelectedItem;
+
+            if (a != null) {
+                wChoosed = a;
+                if (sChoosed != null)
+                { Play.IsEnabled = true; }
+                Guns.DataContext = a; }
         }
 
         private void ShipChoose(object sender, SelectionChangedEventArgs e)
         {
-            var a = (Weapon)sender;
-            if(a!=null)
-            Ships.DataContext = a;
+            var a = (Ship)MyShips.SelectedItem;
+            if (a != null)
+            {
+                sChoosed = a;
+                if (wChoosed != null)
+                { Play.IsEnabled = true; }
+                Ships.DataContext = a;
+            }
         }
     }
 }

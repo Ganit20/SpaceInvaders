@@ -1,4 +1,5 @@
 ﻿using SpaceInvaders.Model;
+using SpaceInvaders.PlayerShips.BasicShip;
 using SpaceInvaders.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -33,8 +34,8 @@ namespace SpaceInvaders.View
             prof.Name = ProfileName.Text;
             prof.Money = 0;
             prof.HighestScore = 0;
-            prof.ShipsUnlocked.Add(1);
-            prof.WeaponsUnlocked.Add(1);
+            prof.ShipsUnlocked.Add(0);
+            prof.WeaponsUnlocked.Add(0);
             new Save(prof); 
             window.MainFrame.Navigate(new MainMenu(window,prof));
             

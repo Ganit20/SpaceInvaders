@@ -22,7 +22,7 @@ namespace SpaceInvaders.Model
             Unlock = true,
             BulletHeight = 15,
             BulletWidth = 15,
-            BulletTexture = new BitmapImage(new Uri("/Assets/Sprites/BasicLaser.png", UriKind.Relative)),
+            BulletTexture = "/Assets/Sprites/BasicLaser.png", 
             BulletSpeed = 7,
         };
     }

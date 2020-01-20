@@ -21,7 +21,7 @@ namespace SpaceInvaders.Weapons.RailLaser
             Damage= 1,
             BulletWidth = 30,
             Price = 1500,
-            BulletTexture = new BitmapImage(new Uri("/Assets/Sprites/RailBullet.png", UriKind.Relative)),
+            BulletTexture ="/Assets/Sprites/RailBullet.png",
         };
     }
 }

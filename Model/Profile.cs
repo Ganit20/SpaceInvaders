@@ -10,5 +10,7 @@ namespace SpaceInvaders.Model
         public  int HighestScore { get; set; }
         public List<int> WeaponsUnlocked = new List<int>();
         public List<int> ShipsUnlocked = new List<int>();
+        public List<Weapon> WUnlocked = new List<Weapon>();
+        public List<Ship> SUnlocked = new List<Ship>();
     }
 }
